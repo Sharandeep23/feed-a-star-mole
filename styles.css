@@ -23,13 +23,13 @@ body {
 /* Worm meter */
 
 .worm-box {
-    margin: 10px auto 0;
+    margin: 10px auto 5px;
     width: 1325px;
 }
 
 .worm-container {
     width: 5%;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: width 0.5s ease-in-out;
 }
 
@@ -95,7 +95,7 @@ body {
     }
     .worm {
         width: 1660px;
-        height: 148px;
+        height: 140px;
     }
 
     .hole {
