@@ -3,13 +3,18 @@ const MAX_INTERVAL = 20000;
 const SAD_INTERVAL = 500;
 const HUNGRY_INTERVAL = 2000;
 
+// Mole Status Flow
+// Hungry ➡️ Sad/Fed ➡️ Leaving ➡️ Gone 🔁
+
 // We gotta expand this for level
 const wormContainer = document.querySelector('.worm-container');
 // Initial Score
 let score = 0;
 
-const getInterval = () =>
+// Math.random() will make the Mole animation random
+const getGoneInterval = () =>
   Date.now() + MIN_INTERVAL + Math.floor(Math.random() * MAX_INTERVAL);
+
 const getSadInterval = () => Date.now() + SAD_INTERVAL;
 const getHungryInterval = () => Date.now() + HUNGRY_INTERVAL;
 const getKingStatus = () => Math.random() > 0.8;
@@ -17,64 +22,64 @@ const getKingStatus = () => Math.random() > 0.8;
 // Moles array
 const moles = [
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[0],
+    imgEl: document.querySelectorAll('.mole')[0],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[1],
+    imgEl: document.querySelectorAll('.mole')[1],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[2],
+    imgEl: document.querySelectorAll('.mole')[2],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[3],
+    imgEl: document.querySelectorAll('.mole')[3],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[4],
+    imgEl: document.querySelectorAll('.mole')[4],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[5],
+    imgEl: document.querySelectorAll('.mole')[5],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[6],
+    imgEl: document.querySelectorAll('.mole')[6],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[7],
+    imgEl: document.querySelectorAll('.mole')[7],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[8],
+    imgEl: document.querySelectorAll('.mole')[8],
   },
   {
-    status: 'hungry',
-    interval: getHungryInterval(),
+    status: 'leaving',
+    interval: getSadInterval(),
     isKing: false,
-    el: document.querySelectorAll('.mole')[9],
+    imgEl: document.querySelectorAll('.mole')[9],
   },
 ];
 
@@ -83,11 +88,13 @@ const changeMoleObj = (mole) => {
     case 'hungry':
       mole.status = 'sad';
       mole.interval = getSadInterval();
-      mole.el.classList.remove('hungry');
+
+      mole.imgEl.classList.remove('hungry');
+
       if (mole.IsKing) {
-        mole.el.src = 'images/king-mole-sad.png';
+        mole.imgEl.src = 'images/king-mole-sad.png';
       } else {
-        mole.el.src = 'images/mole-sad.png';
+        mole.imgEl.src = 'images/mole-sad.png';
       }
       break;
     case 'sad':
@@ -95,31 +102,33 @@ const changeMoleObj = (mole) => {
       mole.status = 'leaving';
       mole.interval = getSadInterval();
       if (mole.isKing) {
-        mole.el.src = 'images/king-mole-leaving.png';
+        mole.imgEl.src = 'images/king-mole-leaving.png';
       } else {
-        mole.el.src = 'images/mole-leaving.png';
+        mole.imgEl.src = 'images/mole-leaving.png';
       }
       break;
     case 'leaving':
       mole.status = 'gone';
-      mole.interval = getInterval();
+      mole.interval = getGoneInterval();
       mole.isKing = false;
-      mole.el.classList.add('hide');
+
+      mole.imgEl.classList.add('hide');
       break;
-    case 'gone':
+
+    // For 'gone' status
+    default:
       mole.status = 'hungry';
       mole.interval = getHungryInterval();
       mole.isKing = getKingStatus();
 
-      mole.el.classList.add('hungry');
-      mole.el.classList.remove('hide');
+      mole.imgEl.classList.add('hungry');
+      mole.imgEl.classList.remove('hide');
 
       if (mole.isKing) {
-        mole.el.src = 'images/king-mole-hungry.png';
+        mole.imgEl.src = 'images/king-mole-hungry.png';
       } else {
-        mole.el.src = 'images/mole-hungry.png';
+        mole.imgEl.src = 'images/mole-hungry.png';
       }
-      break;
   }
 };
 
@@ -133,13 +142,13 @@ const feed = (e) => {
   mole.status = 'fed';
   mole.interval = getSadInterval();
 
-  mole.el.classList.remove('hungry');
+  mole.imgEl.classList.remove('hungry');
 
   if (mole.isKing) {
-    mole.el.src = 'images/king-mole-fed.png';
+    mole.imgEl.src = 'images/king-mole-fed.png';
     score += 20;
   } else {
-    mole.el.src = 'images/mole-fed.png';
+    mole.imgEl.src = 'images/mole-fed.png';
     score += 10;
   }
 
@@ -159,8 +168,9 @@ const win = () => {
 document.querySelector('.moles').addEventListener('click', feed);
 
 const nextFrame = () => {
+  const now = Date.now();
   for (let mole of moles) {
-    if (mole.interval < Date.now()) {
+    if (now > mole.interval) {
       changeMoleObj(mole);
     }
   }
