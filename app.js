@@ -11,7 +11,7 @@ const wormContainer = document.querySelector('.worm-container');
 // Initial Score
 let score = 0;
 
-// Math.random() will make the Mole animation random
+// Math.random() will make the Mole animation random by making the 'gone' interval random
 const getGoneInterval = () =>
   Date.now() + MIN_INTERVAL + Math.floor(Math.random() * MAX_INTERVAL);
 
