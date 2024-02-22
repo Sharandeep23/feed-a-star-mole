@@ -43,10 +43,6 @@ body {
 
 /* Moles */
 
-.mole {
-    display: none;
-}
-
 .moles {
     display: flex;
     flex-wrap: wrap;
@@ -71,6 +67,7 @@ body {
     width: 130%;
     position: relative;
     right: 30px;
+    display: none;
 }
 
 /* Win */
