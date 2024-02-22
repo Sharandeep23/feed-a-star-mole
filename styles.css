@@ -43,6 +43,10 @@ body {
 
 /* Moles */
 
+.mole {
+    display: none;
+}
+
 .moles {
     display: flex;
     flex-wrap: wrap;
@@ -77,13 +81,10 @@ body {
 }
 
 /* Utility classes */
-.hide {
-    display: none;
-}
-
 .show {
     display: block;
 }
+
 
 .hungry {
     cursor: url(images/cursor-worm.png), pointer;

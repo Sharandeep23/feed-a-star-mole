@@ -22,68 +22,59 @@ const getKingStatus = () => Math.random() > 0.8;
 // Moles array
 const moles = [
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[0],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[1],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[2],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[3],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[4],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[5],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
+    status: 'gone',
+    interval: getGoneInterval(),
     isKing: false,
     imgEl: document.querySelectorAll('.mole')[6],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[7],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[8],
   },
   {
-    status: 'leaving',
-    interval: getSadInterval(),
-    isKing: false,
+    status: 'gone',
+    interval: getGoneInterval(),
     imgEl: document.querySelectorAll('.mole')[9],
   },
 ];
 
-const changeMoleObj = (mole) => {
+const updateMoleObj = (mole) => {
   switch (mole.status) {
     case 'hungry':
       mole.status = 'sad';
@@ -110,9 +101,8 @@ const changeMoleObj = (mole) => {
     case 'leaving':
       mole.status = 'gone';
       mole.interval = getGoneInterval();
-      mole.isKing = false;
 
-      mole.imgEl.classList.add('hide');
+      mole.imgEl.classList.remove('show');
       break;
 
     // For 'gone' status
@@ -122,7 +112,6 @@ const changeMoleObj = (mole) => {
       mole.isKing = getKingStatus();
 
       mole.imgEl.classList.add('hungry');
-      mole.imgEl.classList.remove('hide');
 
       if (mole.isKing) {
         mole.imgEl.src = 'images/king-mole-hungry.png';
@@ -167,11 +156,21 @@ const win = () => {
 
 document.querySelector('.moles').addEventListener('click', feed);
 
+// Whenever a mole image is loaded, show the mole
+for (let mole of document.querySelectorAll('.mole')) {
+  mole.addEventListener('load', () => {
+    mole.classList.add('show');
+  });
+}
+
+let runAgainAt = Date.now() + 100;
+
 const nextFrame = () => {
   const now = Date.now();
+
   for (let mole of moles) {
-    if (now > mole.interval) {
-      changeMoleObj(mole);
+    if (now >= mole.interval) {
+      updateMoleObj(mole);
     }
   }
   requestAnimationFrame(nextFrame);
