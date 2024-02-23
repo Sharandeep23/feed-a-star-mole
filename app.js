@@ -9,7 +9,7 @@ const HUNGRY_INTERVAL = 2000;
 // We gotta expand this for score incrementing
 const wormContainer = document.querySelector('.worm-container');
 // Initial Score
-let score = 0;
+let score = 5;
 
 // Math.random() will make the Mole animation random
 const getGoneInterval = () =>
