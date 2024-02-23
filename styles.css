@@ -30,7 +30,7 @@ body {
 }
 
 .worm-container {
-    width: 5%;
+    width: 3%;
     overflow: hidden;
     transition: width 0.5s ease-in-out;
 }
