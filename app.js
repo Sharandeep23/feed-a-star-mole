@@ -11,7 +11,7 @@ const wormContainer = document.querySelector('.worm-container');
 // Initial Score
 let score = 0;
 
-// Math.random() will make the Mole animation random by making the 'gone' interval random
+// Math.random() will make the Mole animation random
 const getGoneInterval = () =>
   Date.now() + MIN_INTERVAL + Math.floor(Math.random() * MAX_INTERVAL);
 
@@ -54,7 +54,6 @@ const moles = [
   {
     status: 'gone',
     interval: getGoneInterval(),
-    isKing: false,
     imgEl: document.querySelectorAll('.mole')[6],
   },
   {
@@ -122,10 +121,10 @@ const updateMoleObj = (mole) => {
 };
 
 const feed = (e) => {
-  if (!e.target.classList.contains('hungry')) {
-    return;
-  }
+  // If the clicked element doesn't contain 'hungry' class, do nothing
+  if (!e.target.classList.contains('hungry')) return;
 
+  // Getting index from the clicked element, converting to num and accesing mole from moles through the index.
   const mole = moles[+e.target.dataset.index];
 
   mole.status = 'fed';
@@ -154,6 +153,7 @@ const win = () => {
   document.querySelector('.win').classList.add('show');
 };
 
+// Event listener for the moles utlizing Event bubbling
 document.querySelector('.moles').addEventListener('click', feed);
 
 // Whenever a mole image is loaded, show the mole
