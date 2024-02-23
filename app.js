@@ -17,7 +17,7 @@ const getGoneInterval = () =>
 
 const getSadInterval = () => Date.now() + SAD_INTERVAL;
 const getHungryInterval = () => Date.now() + HUNGRY_INTERVAL;
-const getKingStatus = () => Math.random() > 0.8;
+const getRoyalStatus = () => Math.random() > 0.9;
 
 // Moles array
 const moles = [
@@ -81,7 +81,7 @@ const updateMoleObj = (mole) => {
 
       mole.imgEl.classList.remove('hungry');
 
-      if (mole.IsKing) {
+      if (mole.isRoyal) {
         mole.imgEl.src = 'images/king-mole-sad.png';
       } else {
         mole.imgEl.src = 'images/mole-sad.png';
@@ -91,7 +91,7 @@ const updateMoleObj = (mole) => {
     case 'fed':
       mole.status = 'leaving';
       mole.interval = getSadInterval();
-      if (mole.isKing) {
+      if (mole.isRoyal) {
         mole.imgEl.src = 'images/king-mole-leaving.png';
       } else {
         mole.imgEl.src = 'images/mole-leaving.png';
@@ -108,12 +108,12 @@ const updateMoleObj = (mole) => {
     default:
       mole.status = 'hungry';
       mole.interval = getHungryInterval();
-      mole.isKing = getKingStatus();
+      mole.isRoyal = getRoyalStatus();
 
       mole.imgEl.classList.remove('hide');
       mole.imgEl.classList.add('hungry');
 
-      if (mole.isKing) {
+      if (mole.isRoyal) {
         mole.imgEl.src = 'images/king-mole-hungry.png';
       } else {
         mole.imgEl.src = 'images/mole-hungry.png';
@@ -134,7 +134,7 @@ const feed = (e) => {
 
   mole.imgEl.classList.remove('hungry');
 
-  if (mole.isKing) {
+  if (mole.isRoyal) {
     mole.imgEl.src = 'images/king-mole-fed.png';
     score += 20;
   } else {
