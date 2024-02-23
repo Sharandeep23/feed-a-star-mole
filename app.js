@@ -163,8 +163,6 @@ for (let mole of document.querySelectorAll('.mole')) {
   });
 }
 
-let runAgainAt = Date.now() + 100;
-
 const nextFrame = () => {
   const now = Date.now();
 
