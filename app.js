@@ -121,7 +121,7 @@ const updateMoleObj = (mole) => {
   }
 };
 
-const feed = (e) => {
+const handleFeed = (e) => {
   // If the clicked element doesn't contain 'hungry' class, do nothing
   if (!e.target.classList.contains('hungry')) return;
 
@@ -155,8 +155,8 @@ const win = () => {
   document.querySelector('.win').classList.remove('hide');
 };
 
-// Event listener for the moles utlizing Event bubbling
-document.querySelector('.moles').addEventListener('click', feed);
+// Event listener for the moles utilizing Event bubbling
+document.querySelector('.moles').addEventListener('click', handleFeed);
 
 const nextFrame = () => {
   const now = Date.now();
