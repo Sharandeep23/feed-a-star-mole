@@ -67,20 +67,15 @@ body {
     width: 130%;
     position: relative;
     right: 30px;
-    display: none;
 }
 
 /* Win */
 .win {
     max-width: 100%;
     max-height: 100%;
-    display: none;
 }
 
 /* Utility classes */
-.show {
-    display: block;
-}
 .hide {
     display: none;
 }

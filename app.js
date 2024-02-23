@@ -101,7 +101,7 @@ const updateMoleObj = (mole) => {
       mole.status = 'gone';
       mole.interval = getGoneInterval();
 
-      mole.imgEl.classList.remove('show');
+      mole.imgEl.classList.add('hide');
       break;
 
     // For 'gone' status
@@ -110,6 +110,7 @@ const updateMoleObj = (mole) => {
       mole.interval = getHungryInterval();
       mole.isKing = getKingStatus();
 
+      mole.imgEl.classList.remove('hide');
       mole.imgEl.classList.add('hungry');
 
       if (mole.isKing) {
@@ -151,18 +152,11 @@ const feed = (e) => {
 
 const win = () => {
   document.querySelector('.bg').classList.add('hide');
-  document.querySelector('.win').classList.add('show');
+  document.querySelector('.win').classList.remove('hide');
 };
 
 // Event listener for the moles utlizing Event bubbling
 document.querySelector('.moles').addEventListener('click', feed);
-
-// Whenever a mole image is loaded, show the mole
-for (let mole of document.querySelectorAll('.mole')) {
-  mole.addEventListener('load', () => {
-    mole.classList.add('show');
-  });
-}
 
 const nextFrame = () => {
   const now = Date.now();
