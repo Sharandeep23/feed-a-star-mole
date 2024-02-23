@@ -6,7 +6,7 @@ const HUNGRY_INTERVAL = 2000;
 // Mole Status Flow
 // Hungry ➡️ Sad/Fed ➡️ Leaving ➡️ Gone 🔁
 
-// We gotta expand this for level
+// We gotta expand this for score incrementing
 const wormContainer = document.querySelector('.worm-container');
 // Initial Score
 let score = 0;
