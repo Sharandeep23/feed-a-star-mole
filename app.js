@@ -127,6 +127,7 @@ const feed = (e) => {
   // Getting index from the clicked element, converting to num and accesing mole from moles through the index.
   const mole = moles[+e.target.dataset.index];
 
+  // Updating mole object
   mole.status = 'fed';
   mole.interval = getSadInterval();
 
